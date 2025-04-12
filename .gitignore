@@ -1,0 +1,6 @@
+node_modules
+dist
+**/tempobook/dynamic/
+**/tempobook/storyboards/
+.env
+.env.local

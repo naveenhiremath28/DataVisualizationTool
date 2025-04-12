@@ -1,0 +1,9 @@
+import DataTable from "../components/DataTable";
+
+export default function DataTableStoryboard() {
+  return (
+    <div className="bg-white p-4">
+      <DataTable />
+    </div>
+  );
+}
