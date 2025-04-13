@@ -1,4 +1,5 @@
 export interface DataItem {
+  id?: string | number;
   name: string;
   value: number;
   category: string;
