@@ -9,10 +9,13 @@ import {
   Grid,
   Paper,
   Typography,
-  ToggleButtonGroup,
-  ToggleButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
   CircularProgress,
   Alert,
+  SelectChangeEvent,
 } from "@mui/material";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import PieChartIcon from "@mui/icons-material/PieChart";
@@ -46,13 +49,8 @@ const Dashboard: React.FC = () => {
     fetchDashboardData();
   }, []);
 
-  const handleChartTypeChange = (
-    _event: React.MouseEvent<HTMLElement>,
-    newChartType: ChartType | null,
-  ) => {
-    if (newChartType !== null) {
-      setChartType(newChartType);
-    }
+  const handleChartTypeChange = (event: SelectChangeEvent) => {
+    setChartType(event.target.value as ChartType);
   };
 
   if (loading) {
@@ -77,23 +75,33 @@ const Dashboard: React.FC = () => {
         Dashboard
       </Typography>
 
-      <Box sx={{ mb: 3 }}>
-        <ToggleButtonGroup
-          value={chartType}
-          exclusive
-          onChange={handleChartTypeChange}
-          aria-label="chart type"
-        >
-          <ToggleButton value="bar" aria-label="bar chart">
-            <BarChartIcon sx={{ mr: 1 }} /> Bar
-          </ToggleButton>
-          <ToggleButton value="pie" aria-label="pie chart">
-            <PieChartIcon sx={{ mr: 1 }} /> Pie
-          </ToggleButton>
-          <ToggleButton value="line" aria-label="line chart">
-            <ShowChartIcon sx={{ mr: 1 }} /> Line
-          </ToggleButton>
-        </ToggleButtonGroup>
+      <Box sx={{ mb: 3, minWidth: 200, maxWidth: 300 }}>
+        <FormControl fullWidth>
+          <InputLabel id="chart-type-select-label">Chart Type</InputLabel>
+          <Select
+            labelId="chart-type-select-label"
+            id="chart-type-select"
+            value={chartType}
+            label="Chart Type"
+            onChange={handleChartTypeChange}
+          >
+            <MenuItem value="bar">
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <BarChartIcon sx={{ mr: 1 }} /> Bar Chart
+              </Box>
+            </MenuItem>
+            <MenuItem value="pie">
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <PieChartIcon sx={{ mr: 1 }} /> Pie Chart
+              </Box>
+            </MenuItem>
+            <MenuItem value="line">
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <ShowChartIcon sx={{ mr: 1 }} /> Line Chart
+              </Box>
+            </MenuItem>
+          </Select>
+        </FormControl>
       </Box>
 
       <Grid container spacing={3}>
